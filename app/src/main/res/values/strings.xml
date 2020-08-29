@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PodCastApp_HHH</string>
+    <string name="txt_podcast">Podcast</string>
+    <string name="txt_podCast_description">Having a personalized domain namewill make you stand out of the crowd and let your audience and clients recognize your brand. So, whether you decide on</string>
+    <string name="empty_text">It looks like you aren\'t enrolled
+        in any podcasts, but it\'s easy to get
+        started</string>
+    <string name="loream_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type </string>
+</resources>

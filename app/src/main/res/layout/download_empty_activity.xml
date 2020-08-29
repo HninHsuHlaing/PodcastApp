@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#999999"
+
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/download_background"
+        android:layout_marginTop="100dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty_picker"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp">
+
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="150dp"
+            />
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="@string/empty_text"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="90dp"
+            android:textStyle="bold"
+
+            />
+
+        <Button
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button_background"
+            android:text="FIND SOMETHING NEW"
+            android:layout_marginTop="350dp"
+            android:layout_marginLeft="10dp"
+            >
+
+        </Button>
+        <Button
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/yellow_button_background"
+            android:text="RELOAD"
+            android:layout_marginTop="430dp"
+            android:layout_marginLeft="10dp"
+            >
+
+        </Button>
+    </FrameLayout>
+
+</LinearLayout>
