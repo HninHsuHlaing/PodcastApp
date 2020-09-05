@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/imgdetail"
                     android:layout_width="wrap_content"
                     android:layout_height="150dp"
                     android:src="@drawable/placeholder"
@@ -54,80 +57,111 @@
 <!--                />-->
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Design for everyone, everywhere with yosef P."
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_access_time_24"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12m"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp"
-            />
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/fireemoji"
-            android:layout_marginLeft="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="88"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_message_24"
-            android:layout_marginLeft="15dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp"
-            />
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/dotimg"
-            android:layout_marginLeft="180dp"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvDetailName"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:text="Design for everyone, everywhere with yosef P."
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#090909"
+                    android:textSize="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
 
-    </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_access_time_24"
+                        android:layout_gravity="bottom"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="12m"
+                        android:textColor="#090909"
+                        android:textStyle="bold"
+                        android:layout_gravity="bottom"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/fireemoji"
+                        android:layout_gravity="bottom"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="88"
+                        android:textColor="#090909"
+                        android:textStyle="bold"
+                        android:layout_gravity="bottom"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/ic_baseline_message_24"
+                        android:layout_gravity="bottom"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="10"
+                        android:textColor="#090909"
+                        android:textStyle="bold"
+                        android:layout_gravity="bottom"
+
+                        />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="150dp"
+                        android:src="@drawable/dotimg"
+                        android:layout_gravity="bottom"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="360dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDetilDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="15dp"
-                android:text="@string/loream_text"
+                android:text="@string/loream_text_long"
+                android:lineSpacingMultiplier="1.5"
+                android:paddingTop="5dp"
+
                 />
         </ScrollView>
     </LinearLayout>

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white"
+
     >
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -72,13 +73,11 @@
             android:layout_gravity="bottom"
             android:layout_marginLeft="15dp"
             android:background="@android:color/white"
-            style="@style/MyToolbarStyle"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="24sp"
-               style="@style/MyToolbarStyle"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,19 +115,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         >
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 <!--        <ScrollView-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent">-->
 <!--           -->
 <!--        </ScrollView>-->
         <include layout="@layout/up_next_activity"/>
-        </androidx.core.widget.NestedScrollView>
+
     </RelativeLayout>
 
 

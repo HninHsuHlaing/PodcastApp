@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -28,24 +31,52 @@ android {
 }
 
 dependencies {
+    implementation project(':shared')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation "androidx.cardview:cardview:1.0.0"
 
-    implementation "androidx.viewpager2:viewpager2:1.0.0"
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.11.1'
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.1'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.1'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.1'
+    implementation rootProject.ext.libraries.constraintLayout
+    testImplementation rootProject.ext.libraries.junit
+    androidTestImplementation rootProject.ext.libraries.junitTest
+    androidTestImplementation rootProject.ext.libraries.espresso
+    implementation rootProject.ext.libraries.material
+    implementation rootProject.ext.libraries.cardView
+    implementation rootProject.ext.libraries.viewPager2
+    implementation rootProject.ext.libraries.exoplayer
+    implementation rootProject.ext.libraries.exoplayerCore
+    implementation rootProject.ext.libraries.exoplayerDash
+    implementation rootProject.ext.libraries.exoplayerUi
+    implementation rootProject.ext.libraries.json
+    implementation rootProject.ext.libraries.workmanager
+
+    implementation rootProject.ext.libraries.retrofit
+    implementation rootProject.ext.libraries.retrofitJsonConverter
+    implementation rootProject.ext.libraries.retrofitAdapter
+    def room_version = "2.2.3"
+    def lifecycle_version = "2.2.0"
+
+    // lifecycle components
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+
+    implementation rootProject.ext.libraries.rxAndroid
+    implementation rootProject.ext.libraries.rxJava
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation rootProject.ext.libraries.roomRxjava
+
+    annotationProcessor rootProject.ext.libraries.roomCompiler
+    implementation rootProject.ext.libraries.purchase
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 
 
 

@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp">
+    android:paddingLeft="20dp"
+    android:paddingTop="15dp"
+    android:paddingEnd="20dp"
+
+   >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +33,7 @@
                     app:cardCornerRadius="10dp"
                     >
                     <ImageView
+                        android:id="@+id/imgHomePlayer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/placeholder"
@@ -44,27 +49,33 @@
                     android:layout_marginLeft="10dp"
                     >
                     <TextView
+                        android:id="@+id/tvTitlehomePlayer"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Woman Teach Podcast......"
+                        android:text="Woman Teach Podcast..."
                         android:textSize="17dp"
                         android:textColor="#ffffff"
                         android:textStyle="bold"
                         android:fontFamily="sans-serif-condensed"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         />
                     <TextView
+                        android:id="@+id/tvdescriptionHomePlayer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="The #womanintech Show is "
                         android:textColor="#979797"
                         android:layout_marginTop="4dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         />
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         >
-                        <androidx.core.widget.ContentLoadingProgressBar
+                        <SeekBar
                             android:id="@+id/progressbar"
                             android:layout_width="170dp"
                             android:layout_height="wrap_content"
@@ -74,6 +85,7 @@
                             android:progressTint="#bae2fe"
                             />
                         <TextView
+                            android:id="@+id/tvtimeLeft"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1h left"
@@ -105,6 +117,7 @@
                     android:layout_gravity="center"
                     />
                 <ImageView
+                    android:id="@+id/btnbackward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icons8_replay_30_32"
@@ -120,6 +133,7 @@
                     android:layout_marginLeft="40dp"
                     />
                 <ImageView
+                    android:id="@+id/btnforward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icons8_forward_30_30"

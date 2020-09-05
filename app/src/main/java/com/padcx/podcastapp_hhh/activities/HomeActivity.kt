@@ -1,29 +1,26 @@
 package com.padcx.podcastapp_hhh.activities
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.padcx.podcastapp_hhh.R
-import com.padcx.podcastapp_hhh.adapters.Fragment_Adapter
-import com.padcx.podcastapp_hhh.adapters.Up_Next_Adapter
-import com.padcx.podcastapp_hhh.fragments.Download_fragment
-import com.padcx.podcastapp_hhh.fragments.Home_Fragment
-import com.padcx.podcastapp_hhh.fragments.Search_fragment
+import com.padcx.podcastapp_hhh.adapters.FragmentAdapter
+import com.padcx.podcastapp_hhh.fragments.DownloadFragment
+import com.padcx.podcastapp_hhh.fragments.HomeFragment
+import com.padcx.podcastapp_hhh.fragments.SearchFragment
+import com.padcx.shared.activities.BaseActivity
 import kotlinx.android.synthetic.main.home_activity.*
-import kotlinx.android.synthetic.main.up_next_activity.*
 
-class HomeActivity : AppCompatActivity() ,Home_Fragment.OnFragmentInteractionListener,Search_fragment.OnFragmentInteractionListener
-,Download_fragment.OnFragmentInteractionListener{
+class HomeActivity : BaseActivity()
+    ,HomeFragment.OnFragmentInteractionListener,SearchFragment.OnFragmentInteractionListener
+,DownloadFragment.OnFragmentInteractionListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
-        val mFragmentAdapter = Fragment_Adapter(this)
+        val mFragmentAdapter = FragmentAdapter(this)
             pager2.adapter = mFragmentAdapter
 
         pager2.currentItem = 0
