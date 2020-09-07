@@ -1,8 +1,8 @@
-package com.padcx.podcastapp_hhh.view_holders
+package com.padcx.podcastapp_hhh.views.view_holders
 
 import android.view.View
+import com.bumptech.glide.Glide
 import com.padcx.podcastapp_hhh.data.vo.GenreVO
-import com.padcx.podcastapp_hhh.data.vo.ItemVO
 import com.padcx.shared.viewHolders.SharedBaseViewHolder
 import kotlinx.android.synthetic.main.categories_item.view.*
 
@@ -15,6 +15,11 @@ class SearchHolder(itemView: View) : SharedBaseViewHolder<GenreVO>(itemView) {
         mData = data
         data.let {
             itemView.tvCategoriesName.text = data.name
+            //itemView.imgcategories
+            Glide
+                .with(itemView.context)
+                .load(data.image)
+                .into(itemView.imgcategories)
         }
     }
 //    override fun bind_GenreData(data: GenreVO) {

@@ -16,7 +16,7 @@ import com.padcx.podcastapp_hhh.persistent.daos.*
 
 @Database(entities = [GenreVO::class,RandomPodcastVO::class,PodcastVO::class,
 ItemVO::class,DataVO::class, GetDetailResponse::class,RandomPodcstResponse::class
-],version = 3,exportSchema = false)
+],version = 4,exportSchema = false)
 abstract class PodcastDb : RoomDatabase() {
 
     companion object{

@@ -20,6 +20,7 @@ ext{
  purchaseVersion = "2.3.1"
  jsonVersion ="2.8.6"
  workmanagerVersion = "2.3.1"
+ smartiestVersion = "1.3.9-appcompat"
 
 
 
@@ -46,6 +47,7 @@ ext{
          purchase:"com.revenuecat.purchases:purchases:$purchaseVersion",
          json : "com.google.code.gson:gson:$jsonVersion",
          workmanager: "androidx.work:work-runtime:$workmanagerVersion",
+         smartiest : "com.github.smarteist:autoimageslider:$smartiestVersion"
 
 ]
 }

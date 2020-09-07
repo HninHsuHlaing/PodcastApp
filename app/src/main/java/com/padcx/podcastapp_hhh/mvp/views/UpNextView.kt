@@ -10,9 +10,13 @@ import com.padcx.shared.view.BaseView
  * on 8/26/2020
  */
 interface UpNextView  : BaseView {
-    fun play_Random_Podcast(podcast : List<RandomPodcastVO>)
+    fun bind_Random_Podcast(podcast : RandomPodcstResponse)
     fun show_all_podcast(latestpodCastList: List<ItemVO>)
     fun navigate_to_Podcast_Detail(id: String)
-    fun downloadPodcast()
+  //  fun downloadPodcast()
     fun checkPermission(itemVO: ItemVO)
+
+    fun onTouchPlayPauseImage(audioUrl : String)
+    fun onTouchForwardThirtySecIcon()
+    fun onTouchBackwardFifteenSecIcon()
 }

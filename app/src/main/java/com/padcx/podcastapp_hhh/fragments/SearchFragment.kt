@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.adapters.SearchAdapter
@@ -31,12 +32,12 @@ class SearchFragment : Fragment() ,SearchView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpPresenter()
-        mPresenter.onUiReady(this)
         setUpRecycler()
+        mPresenter.onUiReady(this)
     }
 
     private fun setUpPresenter() {
-        mPresenter = SearchPresenterImpl()
+        mPresenter = ViewModelProviders.of(this).get(SearchPresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 

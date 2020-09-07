@@ -4,13 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcx.podcastapp_hhh.R
-import com.padcx.podcastapp_hhh.data.vo.GenreVO
 import com.padcx.podcastapp_hhh.data.vo.ItemVO
 import com.padcx.podcastapp_hhh.delegates.UpNextDelegate
 
-import com.padcx.podcastapp_hhh.view_holders.UpNextHolder
-import com.padcx.shared.adapter.BaseAdapter
-import com.padcx.shared.viewHolders.SharedBaseViewHolder
+import com.padcx.podcastapp_hhh.views.view_holders.UpNextHolder
 
 /**
  * Created by Hnin Hsu Hlaing

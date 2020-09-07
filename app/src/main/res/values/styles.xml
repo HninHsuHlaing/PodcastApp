@@ -5,13 +5,45 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">#7C252525</item>
+
     </style>
-<!--    <style name="MyToolbarStyle">-->
-<!--        <item name="android:maxHeight">@dimen/abc_action_bar_default_height_material</item>-->
-<!--        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
-<!--        <item name="android:background">#ffffff</item>-->
-<!--        &lt;!&ndash; No need for colorPrimary, colorPrimaryDark, colorAccent here-->
-<!--             this should go to the AppTheme &ndash;&gt;-->
-<!--    </style>-->
+
+    <style name="playBackText" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_regular_3x</item>
+    </style>
+
+    <style name="detailIconStyle" parent="Theme.MaterialComponents.Light">
+        <item name="android:drawablePadding">@dimen/margin_medium</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ExoMediaButton.FastForward">
+        <item name="android:src">@drawable/forward</item>
+        <item name="android:contentDescription">@string/exo_controls_fastforward_description</item>
+    </style>
+    <style name="ExoMediaButton.Next">
+        <item name="android:src">@drawable/exo_controls_next</item>
+        <item name="android:contentDescription">@string/exo_controls_next_description</item>
+    </style>
+    <style name="ExoMediaButton.Pause">
+        <item name="android:src">@drawable/exo_controls_pause</item>
+        <item name="background">@drawable/play_background</item>
+        <item name="android:contentDescription">@string/exo_controls_pause_description</item>
+    </style>
+    <style name="ExoMediaButton.Play">
+        <item name="android:src">@drawable/exo_controls_play</item>
+        <item name="android:contentDescription">@string/exo_controls_play_description</item>
+    </style>
+    <style name="ExoMediaButton.Previous">
+        <item name="android:src">@drawable/exo_controls_previous</item>
+        <item name="android:contentDescription">@string/exo_controls_previous_description</item>
+    </style>
+    <style name="ExoMediaButton.Rewind">
+        <item name="android:src">@drawable/back_ward</item>
+        <item name="android:contentDescription">@string/exo_controls_rewind_description</item>
+    </style>
+
 
 </resources>

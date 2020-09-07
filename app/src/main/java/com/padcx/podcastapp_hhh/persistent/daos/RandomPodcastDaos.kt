@@ -15,8 +15,8 @@ import com.padcx.podcastapp_hhh.network.dataResponse.RandomPodcstResponse
  */
 @Dao
 interface RandomPodcastDaos {
-    @Query("SELECT * FROM RandomPodcstEpisode_Table")
-    fun getRandomPodcast(): LiveData<List<RandomPodcastVO>>
+    @Query("SELECT * FROM random_podcast")
+    fun getRandomPodcast(): LiveData<RandomPodcstResponse>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertRandomPodcast(podCastVORandom: RandomPodcstResponse)

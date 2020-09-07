@@ -56,6 +56,7 @@ dependencies {
     implementation rootProject.ext.libraries.retrofit
     implementation rootProject.ext.libraries.retrofitJsonConverter
     implementation rootProject.ext.libraries.retrofitAdapter
+    implementation rootProject.ext.libraries.smartiest
     def room_version = "2.2.3"
     def lifecycle_version = "2.2.0"
 

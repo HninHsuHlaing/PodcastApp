@@ -9,4 +9,7 @@ import com.padcx.shared.view.BaseView
  */
 interface DetailView  :BaseView{
     fun showDetailPodcast(detailResponse: GetDetailResponse)
+    fun onTouchPlayPauseIcon(audioUri : String)
+    fun onTouchForwardThirtySecIcon()
+    fun onTouchBackwardFifteenSecIcon()
 }

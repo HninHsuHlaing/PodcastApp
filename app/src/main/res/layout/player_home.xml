@@ -7,6 +7,7 @@
     android:background="@android:color/white"
     >
     <LinearLayout
+        android:id="@+id/ivPodcastLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -51,6 +52,30 @@
         </FrameLayout>
 
     </LinearLayout>
+    <com.padcx.podcastapp_hhh.views.viewPod.ExoPlayerViewPod
+        android:id="@+id/player_control_view"
+        app:controller_layout_id="@layout/custom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:show_timeout="0"
+        android:layout_below="@id/ivPodcastLogo"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mediaCardView"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_margin="6dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/play_back_color">
+        <include
+            android:id="@+id/musicplayerviewpod"
+            layout="@layout/custom_music_playerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"/>
+    </androidx.cardview.widget.CardView>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -63,18 +88,19 @@
 <!--            android:layout_marginRight="15dp"-->
 <!--            >-->
 <!--        </VideoView>-->
-<com.google.android.exoplayer2.ui.SimpleExoPlayerView
-    android:id="@+id/exoplayer"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    >
+<!--<com.google.android.exoplayer2.ui.SimpleExoPlayerView-->
+<!--    android:id="@+id/exoplayer"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="150dp"-->
+<!--    android:layout_marginLeft="15dp"-->
+<!--    android:layout_marginRight="15dp"-->
+<!--    >-->
 
-</com.google.android.exoplayer2.ui.SimpleExoPlayerView>
-        <include layout="@layout/main_player"
+<!--</com.google.android.exoplayer2.ui.SimpleExoPlayerView>-->
+<!--        <include layout="@layout/main_player"-->
 
-            />
+<!--            />-->
+
 
 <!--        <ImageButton-->
 <!--            android:id="@+id/btnVdPlay"-->
@@ -83,14 +109,15 @@
 <!--            android:src="@drawable/ic_baseline_play_circle_filled_24"-->
 <!--            android:layout_gravity="center"-->
 <!--            />-->
+
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="20dp"
         android:backgroundTint="#FBF9F9"
@@ -98,6 +125,7 @@
         app:cardUseCompatPadding="true"
         >
         <TextView
+            android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:text="@string/loream_text"

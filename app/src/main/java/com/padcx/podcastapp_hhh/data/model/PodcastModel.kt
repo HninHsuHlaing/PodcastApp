@@ -7,6 +7,7 @@ import com.padcx.podcastapp_hhh.data.vo.GenreVO
 import com.padcx.podcastapp_hhh.data.vo.ItemVO
 import com.padcx.podcastapp_hhh.data.vo.RandomPodcastVO
 import com.padcx.podcastapp_hhh.network.dataResponse.GetDetailResponse
+import com.padcx.podcastapp_hhh.network.dataResponse.RandomPodcstResponse
 
 /**
  * Created by Hnin Hsu Hlaing
@@ -19,7 +20,8 @@ interface PodcastModel  {
    // fun getAllDummyGenreList() : List<GenreVO>
 
     /////Random Podcast////
-    fun getRandomPodcast() : LiveData<List<RandomPodcastVO>>
+    fun save_random_podcast_to_db()
+    fun getRandomPodcast() : LiveData<RandomPodcstResponse>
 
     /////PlayList/////
     fun getPlayListInfoFromDb() : LiveData<List<ItemVO>>
@@ -32,5 +34,8 @@ interface PodcastModel  {
 
     ///Download
     fun downloadPodcast(context: Context, itemVO: ItemVO) : Long
+    //SaveDownlodItem
     fun saveDownloadItem(dataVO: DataVO)
+    // getDownloadFromDb
+    fun getAllDownload():LiveData<List<DataVO>>
 }

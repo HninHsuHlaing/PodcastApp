@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.activities.DetailActivity
 import com.padcx.podcastapp_hhh.adapters.DownloadAdapter
+import com.padcx.podcastapp_hhh.data.vo.DataVO
 import com.padcx.podcastapp_hhh.delegates.UpNextDelegate
 import com.padcx.podcastapp_hhh.mvp.presenters.DownloadPresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.DownloadPresenterImpl
@@ -33,12 +35,13 @@ class DownloadFragment :Fragment(),DownloadView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpPresenter()
-        mPresenter.onUiReady()
+        mPresenter.onUiReady(this)
         setUpRecycler()
     }
 
         private fun setUpPresenter() {
-            mPresenter = DownloadPresenterImpl()
+        //    mPresenter = DownloadPresenterImpl()
+            mPresenter = ViewModelProviders.of(this).get(DownloadPresenterImpl::class.java)
             mPresenter.initPresenter(this)
         }
 
@@ -62,8 +65,8 @@ class DownloadFragment :Fragment(),DownloadView
 
 
 
-    override fun show_all_downloaded_podcast() {
-
+    override fun show_all_downloaded_podcast(dataVO: List<DataVO>) {
+        mDownload_Adapter.setNewsData(dataVO)
     }
 
     override fun navigate_to_Detail_Podcast(id:String) {

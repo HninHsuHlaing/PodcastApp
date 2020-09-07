@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.data.vo.GenreVO
-import com.padcx.podcastapp_hhh.view_holders.SearchHolder
-import com.padcx.shared.adapter.BaseAdapter
-import com.padcx.shared.viewHolders.SharedBaseViewHolder
+import com.padcx.podcastapp_hhh.views.view_holders.SearchHolder
 
 /**
  * Created by Hnin Hsu Hlaing

@@ -1,6 +1,7 @@
 package com.padcx.podcastapp_hhh.fragments
 
 import android.Manifest
+import android.app.Activity
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,9 +11,11 @@ import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +25,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.PermissionChecker.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.Player
@@ -35,6 +39,7 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Log
 import com.google.android.exoplayer2.util.Util
+import com.padcx.podcastapp_hhh.MyMediaPlayerHelper
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.activities.DetailActivity
 import com.padcx.podcastapp_hhh.adapters.UpNextAdapter
@@ -44,6 +49,10 @@ import com.padcx.podcastapp_hhh.delegates.UpNextDelegate
 import com.padcx.podcastapp_hhh.mvp.presenters.HomePresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.HomePresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.UpNextView
+import com.padcx.podcastapp_hhh.network.dataResponse.RandomPodcstResponse
+import com.padcx.podcastapp_hhh.views.viewPod.ExoPlayerViewPod
+import com.padcx.podcastapp_hhh.views.viewPod.MediaPlayer.MusicPlayerPlayerViewPod
+import kotlinx.android.synthetic.main.custom_layout.*
 import kotlinx.android.synthetic.main.main_player.*
 import kotlinx.android.synthetic.main.player_home.*
 import kotlinx.android.synthetic.main.up_next_activity.*
@@ -59,12 +68,14 @@ class HomeFragment : Fragment() ,UpNextView
     var flag = false
     private lateinit var mPresenter: HomePresenter
     lateinit var mUpNextAdapter: UpNextAdapter
+    private var initPlayer = true
 
     lateinit var song :MediaPlayer
-    private lateinit var simpleExoplayer: SimpleExoPlayer
+    private lateinit var mExoPlayerViewPod : ExoPlayerViewPod
     private var listener: OnFragmentInteractionListener? = null
     private var downloadId  :Long = 0
     private var mData: ItemVO? = null
+    private lateinit var mMusicPlayerViewPod: MusicPlayerPlayerViewPod
     companion object{
         const val REQUEST_CODE = 100
         fun newInstance()= HomeFragment().apply {
@@ -95,57 +106,22 @@ class HomeFragment : Fragment() ,UpNextView
         super.onViewCreated(view, savedInstanceState)
         setUpPresenter()
        init()
+        setUpViewPod()
         setUpRecycler()
         mPresenter.onUiReady(this)
+     //   player_control_view.visibility = View.GONE
+        musicplayerviewpod.visibility = View.GONE
+        mediaCardView.visibility = View.GONE
 
+//
+    }
 
-//        btnplayMain.setOnClickListener {
-//            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//                if(checkSelfPermission(requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE) == PERMISSION_DENIED){
-//                    requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),STORAGE_PERMISSION_CODE)
-//                }else{
-//                    startDownloading()
-//                }
-//            }
-//        }
+    private fun setUpViewPod() {
+        mExoPlayerViewPod = player_control_view as ExoPlayerViewPod
 
-        btnplayMain.setOnClickListener {
-
-            if(flag == false){
-               // playMedia("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
-               playMp3Song()
-               var duration = (song.duration)/1000
-                var durationHour = duration/60
-                var durationMin = duration%60
-               tvtimeLeft.text = durationHour.toString() + "m" +durationMin.toString() +"sec"
-                flag = true
-            }else{
-                song.pause()
-                var durationLeft = (song.duration-song.currentPosition)/1000
-                var durationletHour = durationLeft/60
-                var durationleftmin = durationLeft%60
-                tvtimeLeft.text = durationletHour.toString()+"m"+durationleftmin.toString()+"sec left"
-                flag = false
-            }
-        }
-        btnforward.setOnClickListener {
-
-            song.seekTo(song.currentPosition+1500)
-        }
-        btnbackward.setOnClickListener {
-            song.seekTo(song.currentPosition-1500)
-        }
-
-
-     //   exoVideoPlayer()
-        exoplayer.visibility =View.GONE
-       // exoPlayerMp3()////this is the real exoplayer
-
-
-      //  exoVideoPlayer()
-//        btnVdPlay.setOnClickListener {
-//            videoPlayer()
-//        }
+        /////Media View////
+        mMusicPlayerViewPod = musicplayerviewpod as MusicPlayerPlayerViewPod
+        mMusicPlayerViewPod.setDelegate(mPresenter)
     }
 
     private fun downloadfile() {
@@ -176,7 +152,7 @@ class HomeFragment : Fragment() ,UpNextView
     }
 
     private fun setUpPresenter() {
-        mPresenter = HomePresenterImpl()
+        mPresenter = ViewModelProviders.of(this).get(HomePresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 
@@ -193,52 +169,6 @@ class HomeFragment : Fragment() ,UpNextView
             song.seekTo(-1500)
         }
     }
-    private fun playMp3Song() {
-        song = MediaPlayer.create(requireContext(),R.raw.good_luck)
-        song.start()
-        var currentPosition = song.currentPosition / 1000
-        progressbar.progress = currentPosition
-
-        progressbar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-
-            }
-
-
-        })
-    }
-
-    private fun exoPlayerMp3() {
-        var mediaSource: ProgressiveMediaSource? = null
-            simpleExoplayer = SimpleExoPlayer.Builder(requireContext()).build()
-        simpleExoplayer!!.repeatMode = Player.REPEAT_MODE_ALL
-            exoplayer.player = simpleExoplayer
-        val userAgent =
-            Util.getUserAgent(exoplayer.context,"exoplayer")
-        mediaSource = ProgressiveMediaSource
-                .Factory(
-            DefaultDataSourceFactory(requireContext(), userAgent),
-            DefaultExtractorsFactory()
-        )
-            .createMediaSource(Uri.parse("https://c4.biketo.com/article_video/20190917/4jsDf5pEGC.mp4"))
-        simpleExoplayer!!.prepare(mediaSource!!, true, false)
-        simpleExoplayer!!.playWhenReady = true
-    }
-
-//    private fun exoPlayerMp3(uri :Uri): MediaSource {
-//        val userAgent = Util.getUserAgent(requireContext(), "Exo")
-//        return ExtractorMediaSource.Factory(DefaultDataSourceFactory(requireContext(), userAgent))
-//            .setExtractorsFactory(DefaultExtractorsFactory()).createMediaSource(uri)
-//    }
 
     override fun onStart() {
         super.onStart()
@@ -247,35 +177,10 @@ class HomeFragment : Fragment() ,UpNextView
 
     override fun onPause() {
         super.onPause()
-        context?.unregisterReceiver(downloadReceiver)
+//        context?.unregisterReceiver(downloadReceiver)
       //  song.pause()
     }
 
-    private fun exoVideoPlayer() {
-
-        val uripath = "https://c4.biketo.com/article_video/20190917/4jsDf5pEGC.mp4"
-        val userAgent = Util.getUserAgent(requireContext(),"playVideo")
-        val bandwidthMeter = DefaultBandwidthMeter()
-        val trackSelector = DefaultTrackSelector(AdaptiveTrackSelection.Factory(bandwidthMeter))
-       // exoplayer.ExoPlayerFactory.newSimpleInstance(this,trackSelector)
-        val exoPlayer : SimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(requireContext(),trackSelector)
-        val uri = Uri.parse("https://www.youtube.com/watch?v=FRv7lBYFY2g&list=RDFRv7lBYFY2g&start_radio=1")
-        val defaultHttpDataFactory = DefaultDataSourceFactory(requireContext(),userAgent)
-        val extrafactory = DefaultExtractorsFactory()
-        val mediaSource = ExtractorMediaSource(uri,defaultHttpDataFactory,extrafactory,null,null)
-
-
-
-        exoPlayer.prepare(mediaSource)
-        exoPlayer.playWhenReady = true
-        exoplayer.player = exoPlayer
-
-     //   simpleExoplayer =SimpleExoPlayer
-//        val trackSelector = DefaultTrackSelector()
-//        val exoPlayer = SimpleExoPlayer.newSimpleInstance(baseContext,trackSelector)
-//        exoPlayer?.player = exoPlayer
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -338,18 +243,31 @@ class HomeFragment : Fragment() ,UpNextView
         upNext_Recycler?.adapter = mUpNextAdapter
     }
 
-    override fun play_Random_Podcast(podcast : List<RandomPodcastVO>) {
-        btnplayMain.setOnClickListener {
-            if(flag == false){
-                playMedia(podcast.last().listennotes_url)
-                flag = true
-            }else{
-                song.pause()
-                flag = false
-            }
-        }
-        tvTitlehomePlayer.text = podcast.last().title
-        tvdescriptionHomePlayer.text = podcast.last().thumbnail
+    override fun bind_Random_Podcast(podcast : RandomPodcstResponse) {
+        tvDescription.text = Html.fromHtml( podcast.description)
+        mExoPlayerViewPod.setData(
+            podcast.title,
+            podcast.audio,
+            podcast.image
+        )
+        Log.d("Song",podcast.audio)
+        tvpodcasttitle.text=podcast.randomPodcast.title
+      //  mMusicPlayerViewPod.setData("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
+       // mMusicPlayerViewPod.setData(podcast.audio)
+        mMusicPlayerViewPod.setUpData(podcast.title,podcast.description,podcast.image,
+            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
+//        btnplayMain.setOnClickListener {
+//            if(flag == false){
+//                playMedia(podcast.audio)
+//                flag = true
+//            }else{
+//                song.pause()
+//                flag = false
+//            }
+//        }
+//        tvTitlehomePlayer.text = podcast.title
+//     //   tvdescriptionHomePlayer.text =
+//        tvDescriptionPodcast.text=  podcast.description
 
 
     }
@@ -366,9 +284,9 @@ class HomeFragment : Fragment() ,UpNextView
 
     }
 
-    override fun downloadPodcast() {
-        startDownloading()
-    }
+//    override fun downloadPodcast() {
+//        startDownloading()
+//    }
 
     override fun checkPermission(itemVO: ItemVO) {
 
@@ -382,6 +300,7 @@ class HomeFragment : Fragment() ,UpNextView
             } == PackageManager.PERMISSION_GRANTED -> {
                 context?.let {
                     downloadId = mPresenter.download(it, mData!!)
+                   // Log.d("Downloaded", mData!!.data.link.toString())
                 }
             }
             else -> {
@@ -391,6 +310,28 @@ class HomeFragment : Fragment() ,UpNextView
                 )
             }
         }
+    }
+
+    override fun onTouchPlayPauseImage(audioUrl: String) {
+        if (initPlayer) {
+            MyMediaPlayerHelper.initMediaPlayer(
+                activity as Activity, audioUrl,
+                mMusicPlayerViewPod.getSeekBar(),
+                mMusicPlayerViewPod.getPlayPauseImage(),
+                mMusicPlayerViewPod.getRemainingTime(),
+                mMusicPlayerViewPod.getRemainingTime()
+            )
+            initPlayer = false
+        }
+        MyMediaPlayerHelper.playPauseMediaPlayBack(activity as Activity)
+    }
+
+    override fun onTouchForwardThirtySecIcon() {
+        MyMediaPlayerHelper.forwardMediaPlayBack(activity as Activity)
+    }
+
+    override fun onTouchBackwardFifteenSecIcon() {
+        MyMediaPlayerHelper.backwardMediaPlayBack(activity as Activity)
     }
 
     override fun onRequestPermissionsResult(

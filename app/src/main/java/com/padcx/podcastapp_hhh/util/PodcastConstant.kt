@@ -6,7 +6,7 @@ package com.padcx.podcastapp_hhh.util
  */
 
 const val PARAM_API_KEY ="1482256d06c14502a542d48c95407f18"
-const val BASE_URL = "https://listen-api.listennotes.com/api/v2/"
+const val BASE_URL = "https://3c9367d1-c4bf-4783-ac98-052f7bed3a25.mock.pstmn.io"
 const val GET_RANDOMPODCAST = "just_listen"
 const val GET_GENRES = "genres"
 const val GET_PLAYLIST_INFO_AND_ITEM = "playlists/{id}?type=episode_list&last_timestamp_ms=0&sort=recent_added_first"

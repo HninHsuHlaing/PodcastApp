@@ -1,6 +1,7 @@
 package com.padcx.podcastapp_hhh.mvp.presenters.impl
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.padcx.podcastapp_hhh.data.model.PodcastModel
@@ -21,7 +22,10 @@ class HomePresenterImpl :HomePresenter, AbstractBasePresenter<UpNextView>() {
     override fun onUiReady(lifeCycleOwner: LifecycleOwner) {
         mPodcastModel.getRandomPodcast().observe(lifeCycleOwner, Observer{
            // mView?.play_Random_Podcast("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
-            mView?.play_Random_Podcast(it)
+           // Log.d("Random" ,it.toString())
+            mView?.bind_Random_Podcast(
+                it
+            )
 
         })
 
@@ -41,12 +45,24 @@ class HomePresenterImpl :HomePresenter, AbstractBasePresenter<UpNextView>() {
         mPodcastModel.saveDownloadItem(dataVO)
     }
 
-    override fun onTapPodCast_Item(itemVO: ItemVO) {
-        mView?.navigate_to_Podcast_Detail(itemVO.id.toString())
+    override fun onTapPodCast_Item(podcastid: String) {
+        mView?.navigate_to_Podcast_Detail(podcastid)
     }
 
     override fun onTapDownload(itemVO: ItemVO) {
        // mView?.downloadPodcast()
         mView?.checkPermission(itemVO)
+    }
+
+    override fun onTouchPlayPause(audioUrl: String) {
+        mView?.onTouchPlayPauseImage(audioUrl)
+    }
+
+    override fun onTouchFifteenSec() {
+        mView?.onTouchBackwardFifteenSecIcon()
+    }
+
+    override fun onTouchThirtySec() {
+        mView?.onTouchForwardThirtySecIcon()
     }
 }

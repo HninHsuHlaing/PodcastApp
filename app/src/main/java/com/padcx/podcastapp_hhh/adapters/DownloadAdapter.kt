@@ -5,11 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.data.vo.DataVO
+import com.padcx.podcastapp_hhh.data.vo.ItemVO
 import com.padcx.podcastapp_hhh.delegates.DownloadDelagate
-import com.padcx.podcastapp_hhh.delegates.UpNextDelegate
-import com.padcx.podcastapp_hhh.view_holders.DownloadHolder
-import com.padcx.shared.adapter.BaseAdapter
-import com.padcx.shared.viewHolders.SharedBaseViewHolder
+import com.padcx.podcastapp_hhh.views.view_holders.DownloadHolder
 
 /**
  * Created by Hnin Hsu Hlaing
@@ -28,6 +26,11 @@ class DownloadAdapter(val delegate: DownloadDelagate) : RecyclerView.Adapter<Dow
 
     override fun getItemCount(): Int {
         return mData.count()
+    }
+    fun setNewsData(data : List<DataVO>){
+        mData.clear()
+        mData = data.toMutableList()
+        notifyDataSetChanged()
     }
 
 

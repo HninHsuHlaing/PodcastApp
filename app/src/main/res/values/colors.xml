@@ -7,6 +7,10 @@
     <color name="colorRed">#B80716</color>
     <color name="colorYellow">#F3DE92</color>
     <color name="textView_background_color">#A6A4A4</color>
+    <color name="play_back_color">#5854a3</color>
+    <color name="progress_color">#bae2fe</color>
+    <color name="white">#FFFFFF</color>
+    <color name="text_color_tertary">#979797</color>
 
 
 </resources>

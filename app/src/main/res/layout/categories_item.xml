@@ -10,6 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/imgcategories"
             android:layout_width="180dp"
             android:layout_height="200dp"
             android:src="@drawable/placeholder"

@@ -1,8 +1,12 @@
 package com.padcx.podcastapp_hhh.activities
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.padcx.podcastapp_hhh.R
@@ -13,9 +17,22 @@ import com.padcx.podcastapp_hhh.fragments.SearchFragment
 import com.padcx.shared.activities.BaseActivity
 import kotlinx.android.synthetic.main.home_activity.*
 
+
 class HomeActivity : BaseActivity()
     ,HomeFragment.OnFragmentInteractionListener,SearchFragment.OnFragmentInteractionListener
 ,DownloadFragment.OnFragmentInteractionListener{
+
+    val fragment1: Fragment = HomeFragment()
+    val fragment2: Fragment = SearchFragment()
+    val fragment3: Fragment = DownloadFragment()
+    val fm: FragmentManager = supportFragmentManager
+    var active: Fragment = fragment1
+    companion object{
+        fun newIntent(context: Context):Intent{
+            val intent =  Intent(context, DetailActivity::class.java)
+            return intent
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +65,20 @@ class HomeActivity : BaseActivity()
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.home_menu -> {
+                        fm.beginTransaction().hide(active).show(fragment1).commit();
+                        active = fragment1
                         pager2.currentItem = 0
                         return  true
                     }
                     R.id.search_menu -> {
+                        fm.beginTransaction().hide(active).show(fragment2).commit();
+                        active = fragment2;
                         pager2.currentItem = 1
                         return  true
                     }
                     R.id.download_menu -> {
+                        fm.beginTransaction().hide(active).show(fragment3).commit();
+                        active = fragment3;
                         pager2.currentItem = 2
                         return  true
                     }

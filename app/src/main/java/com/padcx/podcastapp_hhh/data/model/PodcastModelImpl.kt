@@ -2,13 +2,14 @@ package com.padcx.podcastapp_hhh.data.model
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
-import com.padcx.podcastapp_hhh.data.dummy.getAllGenreList
 import com.padcx.podcastapp_hhh.data.vo.DataVO
 import com.padcx.podcastapp_hhh.data.vo.GenreVO
 import com.padcx.podcastapp_hhh.data.vo.ItemVO
 import com.padcx.podcastapp_hhh.data.vo.RandomPodcastVO
 import com.padcx.podcastapp_hhh.network.dataResponse.GetDetailResponse
+import com.padcx.podcastapp_hhh.network.dataResponse.RandomPodcstResponse
 import com.padcx.podcastapp_hhh.persistent.db.PodcastDb
 import com.padcx.podcastapp_hhh.startDownload
 import com.padcx.podcastapp_hhh.util.PARAM_API_KEY
@@ -48,19 +49,23 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
 
 
     @SuppressLint("CheckResult")
-    private fun save_random_podcast_to_db(){
+    override fun save_random_podcast_to_db() {
         mPodcastApi.loadRandomPodcastEpisode(PARAM_API_KEY)
             .map{
+                Log.d("Tag",it.toString())
                 it
+
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 mPodcastDb.RandomPodcastDaos().insertRandomPodcast(it)
             }
+
     }
-    override fun getRandomPodcast(): LiveData<List<RandomPodcastVO>> {
+    override fun getRandomPodcast(): LiveData<RandomPodcstResponse> {
         save_random_podcast_to_db()
+        //Log.d("Random Data",mPodcastDb.RandomPodcastDaos().getRandomPodcast().toString())
         return mPodcastDb.RandomPodcastDaos().getRandomPodcast()
     }
 
@@ -68,7 +73,7 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
 
     @SuppressLint("CheckResult")
     private fun save_PlayList_Podcast_item(){
-        mPodcastApi.loadPodCastPlaylistInfoAndItem(PARAM_API_KEY,"SgTozE1ZAe3")
+        mPodcastApi.loadPodCastPlaylistInfoAndItem(PARAM_API_KEY,"m1pe7z60bsw")
             .map {
                 it.item.toList()
             }
@@ -88,7 +93,9 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
     @SuppressLint("CheckResult")
     override fun save_detailPodcast(pid : String){
        mPodcastApi.loadDetailForEpisode(PARAM_API_KEY,pid)
-           .map { it }
+           .map {
+               it
+           }
            .subscribeOn(Schedulers.io())
            .observeOn(AndroidSchedulers.mainThread())
            .subscribe {
@@ -109,6 +116,10 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
 
     override fun saveDownloadItem(dataVO: DataVO) {
         mPodcastDb.DownloadDaos().insertData(dataVO)
+    }
+
+    override fun getAllDownload(): LiveData<List<DataVO>> {
+        return mPodcastDb.DownloadDaos().getAllDownloadData()
     }
 
 //    fun initDatabase(context: Context){
