@@ -10,13 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.padcx.podcastapp_hhh.MyMediaPlayerHelper
+import com.padcx.podcastapp_hhh.util.MyMediaPlayerHelper
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.mvp.presenters.DetailPresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.DetailPresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.DetailView
 import com.padcx.podcastapp_hhh.network.dataResponse.GetDetailResponse
-import com.padcx.podcastapp_hhh.views.viewPod.ExoPlayerViewPod
 import com.padcx.podcastapp_hhh.views.viewPod.MediaPlayer.MiniMusicPlayerViewPod
 import com.padcx.podcastapp_hhh.views.viewPod.SmallExoPlayerViewPod
 import kotlinx.android.synthetic.main.show_detail.*
@@ -80,7 +79,8 @@ class DetailActivity : AppCompatActivity() ,DetailView{
             .with(this)
             .load(detailResponse.image)
             .into(imgdetail)
-        tvDetailName.text = detailResponse.title
+         tvDetailName.text = detailResponse.title
+       // tvDetailType.text = detailResponse.podcastVO.type
         tvDetilDescription.text = Html.fromHtml(detailResponse.description)
         //mMiniMusicPlayerViewPod.setUpData(detailResponse.audio)
         mMiniMusicPlayerViewPod.setUpData("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")

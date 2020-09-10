@@ -19,6 +19,10 @@ import kotlinx.android.synthetic.main.main_player.*
  */
 class HomePresenterImpl :HomePresenter, AbstractBasePresenter<UpNextView>() {
     var mPodcastModel: PodcastModel = PodcastModelImpl
+//    init{
+//        mPodcastModel.getRandomPodcast()
+//    }
+
     override fun onUiReady(lifeCycleOwner: LifecycleOwner) {
         mPodcastModel.getRandomPodcast().observe(lifeCycleOwner, Observer{
            // mView?.play_Random_Podcast("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
@@ -26,7 +30,6 @@ class HomePresenterImpl :HomePresenter, AbstractBasePresenter<UpNextView>() {
             mView?.bind_Random_Podcast(
                 it
             )
-
         })
 
         mPodcastModel.getPlayListInfoFromDb().observe(lifeCycleOwner, Observer {

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+
+    >
     <LinearLayout
+        android:id="@+id/rOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -36,10 +39,10 @@
     </LinearLayout>
     <com.padcx.podcastapp_hhh.views.components.SmartRecyclerView
         android:id="@+id/download_Recycler"
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/download_item"
+        android:layout_below="@id/rOne"
         android:layout_marginLeft="10dp"
         >
 
@@ -48,6 +51,7 @@
         android:id="@+id/emptyViewPod"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/download_empty_activity"/>
+        android:layout_below="@id/rOne"
+        layout="@layout/empty_view_pod"/>
 
-</LinearLayout>
+</RelativeLayout>

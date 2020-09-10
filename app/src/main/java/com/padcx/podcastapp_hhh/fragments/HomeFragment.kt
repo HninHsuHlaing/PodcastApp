@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -19,33 +18,17 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.PermissionChecker.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.exoplayer2.ExoPlayerFactory
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Log
-import com.google.android.exoplayer2.util.Util
-import com.padcx.podcastapp_hhh.MyMediaPlayerHelper
+import com.padcx.podcastapp_hhh.util.MyMediaPlayerHelper
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.activities.DetailActivity
 import com.padcx.podcastapp_hhh.adapters.UpNextAdapter
 import com.padcx.podcastapp_hhh.data.vo.ItemVO
-import com.padcx.podcastapp_hhh.data.vo.RandomPodcastVO
-import com.padcx.podcastapp_hhh.delegates.UpNextDelegate
 import com.padcx.podcastapp_hhh.mvp.presenters.HomePresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.HomePresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.UpNextView
@@ -274,7 +257,8 @@ class HomeFragment : Fragment() ,UpNextView
 
 
     override fun show_all_podcast(latestpodCastList: List<ItemVO>) {
-        mUpNextAdapter.setNewsData(latestpodCastList)
+       // mUpNextAdapter.setNewsData(latestpodCastList)
+        mUpNextAdapter.setData(latestpodCastList)
     }
 
     override fun navigate_to_Podcast_Detail(id: String) {

@@ -62,7 +62,7 @@ class SearchFragment : Fragment() ,SearchView {
     }
 
     override fun show_all_caterogries(list: List<GenreVO>) {
-        mSearchAdapter.setNewsData(list)
+        mSearchAdapter.setData(list)
     }
 
 

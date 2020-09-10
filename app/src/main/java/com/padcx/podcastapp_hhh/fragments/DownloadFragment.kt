@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.activities.DetailActivity
 import com.padcx.podcastapp_hhh.adapters.DownloadAdapter
@@ -16,6 +17,7 @@ import com.padcx.podcastapp_hhh.delegates.UpNextDelegate
 import com.padcx.podcastapp_hhh.mvp.presenters.DownloadPresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.DownloadPresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.DownloadView
+import com.padcx.podcastapp_hhh.views.viewPod.EmptyViewPod
 import kotlinx.android.synthetic.main.download_activity.*
 
 /**
@@ -25,6 +27,7 @@ import kotlinx.android.synthetic.main.download_activity.*
 class DownloadFragment :Fragment(),DownloadView
     {
         private lateinit var mPresenter: DownloadPresenter
+        private lateinit var mEmptyViewPod : EmptyViewPod
     lateinit var mDownload_Adapter: DownloadAdapter
     companion object{
         fun newInstance()=DownloadFragment().apply {
@@ -35,9 +38,15 @@ class DownloadFragment :Fragment(),DownloadView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpPresenter()
-        mPresenter.onUiReady(this)
+        setUpViewPod()
+
         setUpRecycler()
+        mPresenter.onUiReady(this)
     }
+
+        private fun setUpViewPod() {
+            mEmptyViewPod = emptyViewPod as EmptyViewPod
+        }
 
         private fun setUpPresenter() {
         //    mPresenter = DownloadPresenterImpl()
@@ -47,9 +56,15 @@ class DownloadFragment :Fragment(),DownloadView
 
         private fun setUpRecycler() {
         mDownload_Adapter = DownloadAdapter(mPresenter)
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        download_Recycler.layoutManager = linearLayoutManager
-        download_Recycler.adapter = mDownload_Adapter
+            download_Recycler.apply {
+//                val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//                download_Recycler.layoutManager = linearLayoutManager
+//                download_Recycler.adapter = mDownload_Adapter
+                layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
+                adapter = mDownload_Adapter
+                setEmptyView(mEmptyViewPod)
+            }
+
     }
 
     override fun onCreateView(
@@ -66,7 +81,8 @@ class DownloadFragment :Fragment(),DownloadView
 
 
     override fun show_all_downloaded_podcast(dataVO: List<DataVO>) {
-        mDownload_Adapter.setNewsData(dataVO)
+       // mDownload_Adapter.setNewsData(dataVO)
+        mDownload_Adapter.setData(dataVO)
     }
 
     override fun navigate_to_Detail_Podcast(id:String) {

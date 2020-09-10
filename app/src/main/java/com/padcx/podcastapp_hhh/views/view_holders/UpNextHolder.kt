@@ -29,6 +29,7 @@ class UpNextHolder(itemView: View,val mDelegate: UpNextDelegate) : SharedBaseVie
     override fun bindData(data: ItemVO) {
         mData = data
         itemView.tvTitle.text = data.type
+       // itemView.tvTitle.text = data.data.podcast.type
         itemView.tvshowDescription.text = data.data.title
         Glide
             .with(itemView.context)

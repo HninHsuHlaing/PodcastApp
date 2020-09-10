@@ -1,14 +1,14 @@
-package com.padcx.podcastapp_hhh
+package com.padcx.podcastapp_hhh.util
 
 import android.app.Activity
 import android.media.AudioAttributes
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Handler
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import com.padcx.podcastapp_hhh.R
 import java.util.concurrent.TimeUnit
 
 
@@ -40,10 +40,10 @@ object MyMediaPlayerHelper
     ) {
 
         //View Binding
-        mCurrentTime=currentTime
-        mSeekBar=seekBar
-        mPlaypauseImage=playpauseImage
-        mTotalTime=totalTime
+        mCurrentTime =currentTime
+        mSeekBar =seekBar
+        mPlaypauseImage =playpauseImage
+        mTotalTime =totalTime
 
             //Media Player Setup
             mediaPlayer = MediaPlayer().apply {
@@ -81,8 +81,10 @@ object MyMediaPlayerHelper
             playTime = mediaPlayer.currentPosition
             mCurrentTime.text =String.format(
                 "%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(playTime.toLong()),
-                (TimeUnit.MILLISECONDS.toSeconds(playTime.toLong()) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(playTime.toLong()))))
-            mSeekBar.progress = playTime
+                (TimeUnit.MILLISECONDS.toSeconds(playTime.toLong()) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(
+                    playTime.toLong()))))
+            mSeekBar.progress =
+                playTime
             handler.postDelayed(this, 100)
         }
     }
@@ -92,7 +94,9 @@ object MyMediaPlayerHelper
     {
         if ((playTime + forwardTime) <= endTime) {
             playTime += forwardTime
-            mediaPlayer.seekTo(playTime)
+            mediaPlayer.seekTo(
+                playTime
+            )
         } else {
             Toast.makeText(context, "Cannot jump forward 30 seconds", Toast.LENGTH_SHORT).show()
         }
@@ -103,18 +107,26 @@ object MyMediaPlayerHelper
         if(mediaPlayer.isPlaying())
         {
             mediaPlayer.pause()
-            mPlaypauseImage.setImageResource(R.drawable.ic_baseline_play_circle_filled_24)
+            mPlaypauseImage.setImageResource(
+                R.drawable.ic_baseline_play_circle_filled_24
+            )
         }else
         {
             mediaPlayer.start()
-            mediaPlayer.seekTo(mediaPlayer.currentPosition)
-            mPlaypauseImage.setImageResource(R.drawable.ic_baseline_pause_circle_filled_24)
+            mediaPlayer.seekTo(
+                mediaPlayer.currentPosition)
+            mPlaypauseImage.setImageResource(
+                R.drawable.ic_baseline_pause_circle_filled_24
+            )
             endTime = mediaPlayer.duration
             playTime = mediaPlayer.currentPosition
-            mSeekBar.max = endTime
+            mSeekBar.max =
+                endTime
             onTime = 1
-            mSeekBar.progress = playTime
-            handler.postDelayed(updateSongTime, 100)
+            mSeekBar.progress =
+                playTime
+            handler.postDelayed(
+                updateSongTime, 100)
         }
 
         mTotalTime.text = String.format(
@@ -143,7 +155,9 @@ object MyMediaPlayerHelper
     {
         if ((playTime - backwardTime) > 0) {
             playTime -= backwardTime
-            mediaPlayer.seekTo(playTime)
+            mediaPlayer.seekTo(
+                playTime
+            )
         } else {
             Toast.makeText(context, "Cannot jump backward 15 seconds", Toast.LENGTH_SHORT).show()
         }

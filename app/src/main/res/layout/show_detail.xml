@@ -37,9 +37,10 @@
                     android:scaleType="centerCrop"
                    />
                     <TextView
+                        android:id="@+id/tvDetailType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ART AND DESIGN"
+                        android:text="Web Design"
                         android:textSize="15dp"
                         android:background="@drawable/yellow_button_background"
                         android:padding="5dp"

@@ -1,5 +1,6 @@
 package com.padcx.podcastapp_hhh.mvp.presenters.impl
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.padcx.podcastapp_hhh.data.model.PodcastModel
@@ -35,5 +36,13 @@ class DownloadPresenterImpl : DownloadPresenter, AbstractBasePresenter<DownloadV
 
     override fun onTapDownload(itemVO: ItemVO) {
 
+    }
+
+    override fun onTapFindSomethingNew() {
+        Log.d("Tap Find Button","On Tap the FInd item on Download page")
+    }
+
+    override fun onTapReload() {
+       Log.d("Tap Reload Button","On Tap Reload Button on Download page")
     }
 }
