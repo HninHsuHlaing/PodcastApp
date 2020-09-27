@@ -25,5 +25,13 @@ abstract class SharedBaseAdapter<T: SharedBaseViewHolder<W>,W> : RecyclerView.Ad
         mDataList.addAll(data)
         notifyDataSetChanged()
     }
+    fun setNewData(newData: List<W>) {
+        if (newData.isEmpty()){
+            mDataList.clear()
+        }else{
+            mDataList = ArrayList(newData)
+        }
+        notifyDataSetChanged()
+    }
 
 }

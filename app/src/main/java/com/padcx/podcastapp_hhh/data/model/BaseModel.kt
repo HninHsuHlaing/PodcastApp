@@ -1,7 +1,7 @@
 package com.padcx.podcastapp_hhh.data.model
 
 import android.content.Context
-import com.padcx.podcastapp_hhh.PodcastApi
+import com.padcx.podcastapp_hhh.network.PodcastApi
 import com.padcx.podcastapp_hhh.persistent.db.PodcastDb
 import com.padcx.podcastapp_hhh.util.BASE_URL
 import okhttp3.OkHttpClient

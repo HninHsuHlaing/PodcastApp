@@ -28,11 +28,11 @@ import com.padcx.podcastapp_hhh.util.MyMediaPlayerHelper
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.activities.DetailActivity
 import com.padcx.podcastapp_hhh.adapters.UpNextAdapter
-import com.padcx.podcastapp_hhh.data.vo.ItemVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBItemVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBRandomPodcastVO
 import com.padcx.podcastapp_hhh.mvp.presenters.HomePresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.HomePresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.UpNextView
-import com.padcx.podcastapp_hhh.network.dataResponse.RandomPodcstResponse
 import com.padcx.podcastapp_hhh.views.viewPod.ExoPlayerViewPod
 import com.padcx.podcastapp_hhh.views.viewPod.MediaPlayer.MusicPlayerPlayerViewPod
 import kotlinx.android.synthetic.main.custom_layout.*
@@ -57,7 +57,7 @@ class HomeFragment : Fragment() ,UpNextView
     private lateinit var mExoPlayerViewPod : ExoPlayerViewPod
     private var listener: OnFragmentInteractionListener? = null
     private var downloadId  :Long = 0
-    private var mData: ItemVO? = null
+    private var mData: FBItemVO? = null
     private lateinit var mMusicPlayerViewPod: MusicPlayerPlayerViewPod
     companion object{
         const val REQUEST_CODE = 100
@@ -226,18 +226,18 @@ class HomeFragment : Fragment() ,UpNextView
         upNext_Recycler?.adapter = mUpNextAdapter
     }
 
-    override fun bind_Random_Podcast(podcast : RandomPodcstResponse) {
-        tvDescription.text = Html.fromHtml( podcast.description)
+    override fun bind_Random_Podcast(podcast : List<FBRandomPodcastVO>) {
+        tvDescription.text = Html.fromHtml( podcast[0].description)
         mExoPlayerViewPod.setData(
-            podcast.title,
-            podcast.audio,
-            podcast.image
+            podcast[0].title,
+            podcast[0].audio,
+            podcast[0].image
         )
-        Log.d("Song",podcast.audio)
-        tvpodcasttitle.text=podcast.randomPodcast.title
+       // Log.d("Song",podcast[0].audio)
+        tvpodcasttitle.text=podcast[0].title
       //  mMusicPlayerViewPod.setData("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
        // mMusicPlayerViewPod.setData(podcast.audio)
-        mMusicPlayerViewPod.setUpData(podcast.title,podcast.description,podcast.image,
+        mMusicPlayerViewPod.setUpData(podcast[0].title,podcast[0].description,podcast[0].image,
             "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 //        btnplayMain.setOnClickListener {
 //            if(flag == false){
@@ -256,7 +256,7 @@ class HomeFragment : Fragment() ,UpNextView
     }
 
 
-    override fun show_all_podcast(latestpodCastList: List<ItemVO>) {
+    override fun show_all_podcast(latestpodCastList: List<FBItemVO>) {
        // mUpNextAdapter.setNewsData(latestpodCastList)
         mUpNextAdapter.setData(latestpodCastList)
     }
@@ -272,9 +272,9 @@ class HomeFragment : Fragment() ,UpNextView
 //        startDownloading()
 //    }
 
-    override fun checkPermission(itemVO: ItemVO) {
+    override fun checkPermission(itemVO: FBItemVO) {
 
-        mData = itemVO
+        mData = FBItemVO()
         when {
             context?.let {
                 ContextCompat.checkSelfPermission(

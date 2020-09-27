@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padcx.podcastapp_hhh.R
 import com.padcx.podcastapp_hhh.adapters.SearchAdapter
-import com.padcx.podcastapp_hhh.data.vo.GenreVO
+import com.padcx.podcastapp_hhh.firebasee.data.GenreVOFIreBase
 import com.padcx.podcastapp_hhh.mvp.presenters.SearchPresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.SearchPresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.SearchView
@@ -61,8 +61,9 @@ class SearchFragment : Fragment() ,SearchView {
         fun onFragmentInteraction(uri: Uri)
     }
 
-    override fun show_all_caterogries(list: List<GenreVO>) {
+    override fun show_all_caterogries(list: List<GenreVOFIreBase>) {
         mSearchAdapter.setData(list)
+       // mSearchAdapter.setNewsData(list)
     }
 
 

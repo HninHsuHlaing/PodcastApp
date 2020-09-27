@@ -7,6 +7,8 @@ import com.padcx.podcastapp_hhh.data.model.PodcastModel
 import com.padcx.podcastapp_hhh.data.model.PodcastModelImpl
 import com.padcx.podcastapp_hhh.data.vo.DataVO
 import com.padcx.podcastapp_hhh.data.vo.ItemVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBDataVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBItemVO
 import com.padcx.podcastapp_hhh.mvp.presenters.DownloadPresenter
 import com.padcx.podcastapp_hhh.mvp.views.DownloadView
 import com.padcx.shared.presenter.AbstractBasePresenter
@@ -34,7 +36,7 @@ class DownloadPresenterImpl : DownloadPresenter, AbstractBasePresenter<DownloadV
         mView?.navigate_to_Detail_Podcast(podcastid)
     }
 
-    override fun onTapDownload(itemVO: ItemVO) {
+    override fun onTapDownload(itemVO: FBItemVO) {
 
     }
 

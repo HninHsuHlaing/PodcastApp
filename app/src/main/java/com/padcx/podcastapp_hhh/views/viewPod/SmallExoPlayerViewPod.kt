@@ -77,7 +77,7 @@ class SmallExoPlayerViewPod@JvmOverloads constructor(
         simpleExoplayer?.prepare(mediaSource, false, false)
 
     }
-    fun setSamllDataBinder(startDuration:Int,url:String){
+    fun setSamllDataBinder(startDuration:Int?,url:String?){
         //exo_duration.text = startDuration.toString
         val uri = Uri.parse(url)
         val mediaSource = buildMediaSource(uri)

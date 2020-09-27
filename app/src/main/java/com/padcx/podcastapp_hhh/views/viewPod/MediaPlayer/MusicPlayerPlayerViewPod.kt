@@ -24,7 +24,7 @@ class MusicPlayerPlayerViewPod @JvmOverloads constructor(
         mAudioUrl=audioUrl
     }
 
-    fun setUpData(mtitle: String, mdesc: String,mimageUrl: String, maudioUrl : String) {
+    fun setUpData(mtitle: String?, mdesc: String?,mimageUrl: String?, maudioUrl : String?) {
         podcast_title.text= mtitle
         podcast_description.text= Html.fromHtml(mdesc)
      //   podcast_ImageView.load(mimageUrl)

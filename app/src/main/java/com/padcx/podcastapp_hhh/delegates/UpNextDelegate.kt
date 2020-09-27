@@ -1,6 +1,8 @@
 package com.padcx.podcastapp_hhh.delegates
 
 import com.padcx.podcastapp_hhh.data.vo.ItemVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBDataVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBItemVO
 
 /**
  * Created by Hnin Hsu Hlaing
@@ -8,5 +10,5 @@ import com.padcx.podcastapp_hhh.data.vo.ItemVO
  */
 interface UpNextDelegate {
     fun onTapPodCast_Item(podcastid: String)
-    fun onTapDownload(itemVO: ItemVO)
+    fun onTapDownload(itemVO: FBItemVO)
 }

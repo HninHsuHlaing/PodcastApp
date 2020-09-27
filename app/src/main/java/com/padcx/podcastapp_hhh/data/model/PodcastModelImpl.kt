@@ -4,13 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.padcx.podcastapp_hhh.data.vo.DataVO
-import com.padcx.podcastapp_hhh.data.vo.GenreVO
-import com.padcx.podcastapp_hhh.data.vo.ItemVO
-import com.padcx.podcastapp_hhh.data.vo.RandomPodcastVO
+import com.padcx.podcastapp_hhh.data.vo.*
+import com.padcx.podcastapp_hhh.firebasee.data.FBDataVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBItemVO
+import com.padcx.podcastapp_hhh.firebasee.data.FBRandomPodcastVO
+import com.padcx.podcastapp_hhh.firebasee.data.GenreVOFIreBase
+import com.padcx.podcastapp_hhh.firebasee.network.PodcastFireBaseApi
+import com.padcx.podcastapp_hhh.firebasee.network.PodcastRealTimeDataBaseeImpl
 import com.padcx.podcastapp_hhh.network.dataResponse.GetDetailResponse
 import com.padcx.podcastapp_hhh.network.dataResponse.RandomPodcstResponse
-import com.padcx.podcastapp_hhh.persistent.db.PodcastDb
 import com.padcx.podcastapp_hhh.startDownload
 import com.padcx.podcastapp_hhh.util.PARAM_API_KEY
 import io.reactivex.schedulers.Schedulers
@@ -22,6 +24,30 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  * on 9/1/2020
  */
 object PodcastModelImpl :PodcastModel , BaseModel() {
+    override var firebasePodcastApi: PodcastFireBaseApi =
+        PodcastRealTimeDataBaseeImpl
+    override fun getGenerList(onSuccess: (List<GenreVOFIreBase>) -> Unit, onFaiure: (String) -> Unit) {
+        firebasePodcastApi.getGeners(onSuccess,onFaiure)
+    }
+    override fun getPlayliat(onSuccess: (List<FBItemVO>) -> Unit, onFaiure: (String) -> Unit) {
+        firebasePodcastApi.getPlaylist(onSuccess,onFaiure)
+    }
+    override fun getRandomPodcast(
+        onSuccess: (List<FBRandomPodcastVO>) -> Unit,
+        onFaiure: (String) -> Unit
+    ) {
+        firebasePodcastApi.getRandomPodcast(onSuccess,onFaiure)
+    }
+    override fun getDetail( podcastID: String,
+                            onSuccess: (playlist: List<FBItemVO>) -> Unit,
+                            onFialure: (String) -> Unit) {
+      // firebasePodcastApi.getDetail(podcastID,onSuccess,onFialure)
+    }
+
+
+
+
+
 
     @SuppressLint("CheckResult")
     private fun save_genre_list_to_db(){
@@ -39,10 +65,15 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
 
             }
     }
+
+
+
+
     override fun getGenreList(): LiveData<List<GenreVO>> {
         save_genre_list_to_db()
         return mPodcastDb.GenreDaos().getAllGenreList()
        // return getAllGenreList()
+
     }
 
 
@@ -68,6 +99,7 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
         //Log.d("Random Data",mPodcastDb.RandomPodcastDaos().getRandomPodcast().toString())
         return mPodcastDb.RandomPodcastDaos().getRandomPodcast()
     }
+
 
 
 
@@ -110,12 +142,14 @@ object PodcastModelImpl :PodcastModel , BaseModel() {
         return mPodcastDb.Detaildaos().getDetailById(pid)
     }
 
-    override fun downloadPodcast(context: Context, itemVO: ItemVO): Long {
+
+
+    override fun downloadPodcast(context: Context, itemVO: FBItemVO): Long {
         return startDownload(context,itemVO)
     }
 
-    override fun saveDownloadItem(dataVO: DataVO) {
-        mPodcastDb.DownloadDaos().insertData(dataVO)
+    override fun saveDownloadItem(dataVO: FBDataVO) {
+      //  mPodcastDb.DownloadDaos().insertData(dataVO)
     }
 
     override fun getAllDownload(): LiveData<List<DataVO>> {

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.padcx.podcastapp_hhh.util.MyMediaPlayerHelper
 import com.padcx.podcastapp_hhh.R
+import com.padcx.podcastapp_hhh.firebasee.data.FBItemVO
 import com.padcx.podcastapp_hhh.mvp.presenters.DetailPresenter
 import com.padcx.podcastapp_hhh.mvp.presenters.impl.DetailPresenterImpl
 import com.padcx.podcastapp_hhh.mvp.views.DetailView
@@ -74,17 +75,17 @@ class DetailActivity : AppCompatActivity() ,DetailView{
 
     }
 
-    override fun showDetailPodcast(detailResponse: GetDetailResponse) {
+    override fun showDetailPodcast(detailResponse: List<FBItemVO>) {
         Glide
             .with(this)
-            .load(detailResponse.image)
+            .load(detailResponse[0].image)
             .into(imgdetail)
-         tvDetailName.text = detailResponse.title
+         tvDetailName.text = detailResponse[0].title
        // tvDetailType.text = detailResponse.podcastVO.type
-        tvDetilDescription.text = Html.fromHtml(detailResponse.description)
+        tvDetilDescription.text = Html.fromHtml(detailResponse[0].description)
         //mMiniMusicPlayerViewPod.setUpData(detailResponse.audio)
         mMiniMusicPlayerViewPod.setUpData("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
-        mExoPlayerViewPod.setSamllDataBinder(detailResponse.audio_length_sec,detailResponse.audio)
+        mExoPlayerViewPod.setSamllDataBinder(detailResponse[0].audio_length_sec,detailResponse[0].audio)
       //  Log.d("Audio",detailResponse.audio)
     }
 

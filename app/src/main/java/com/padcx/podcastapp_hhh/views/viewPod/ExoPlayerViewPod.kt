@@ -8,8 +8,6 @@ import com.bumptech.glide.Glide
 //import com.example.shared.extensions.checkTime
 //import com.example.shared.extensions.load
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerControlView
@@ -19,8 +17,6 @@ import com.google.android.exoplayer2.util.Util
 import com.padcx.podcastapp_hhh.R
 import kotlinx.android.synthetic.main.custom_layout.view.ivEpisodeTitle
 import kotlinx.android.synthetic.main.custom_layout.view.ivPodcast
-import kotlinx.android.synthetic.main.media_play_back.view.*
-import java.lang.System.load
 
 
 class ExoPlayerViewPod @JvmOverloads constructor(
@@ -66,7 +62,7 @@ class ExoPlayerViewPod @JvmOverloads constructor(
 
 
 
-    fun setData(title:String,playUrl:String,url:String){
+    fun setData(title: String?, playUrl:String?, url: String?){
         ivEpisodeTitle.text = title
        // ivPodcast.load(url)
         Glide
@@ -81,6 +77,8 @@ class ExoPlayerViewPod @JvmOverloads constructor(
         simpleExoplayer?.prepare(mediaSource, false, false)
 
     }
+
+
 
 
 }

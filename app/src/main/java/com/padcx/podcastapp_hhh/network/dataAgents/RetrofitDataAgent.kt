@@ -1,6 +1,6 @@
 package com.padcx.podcastapp_hhh.network.dataAgents
 
-import com.padcx.podcastapp_hhh.PodcastApi
+import com.padcx.podcastapp_hhh.network.PodcastApi
 import com.padcx.podcastapp_hhh.util.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

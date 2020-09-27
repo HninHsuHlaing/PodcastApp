@@ -1,4 +1,4 @@
-package com.padcx.podcastapp_hhh
+package com.padcx.podcastapp_hhh.network
 
 import com.padcx.podcastapp_hhh.data.vo.RandomPodcastVO
 import com.padcx.podcastapp_hhh.network.dataResponse.GenreResponse

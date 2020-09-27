@@ -18,11 +18,18 @@ class DetailPresenterImpl :DetailPresenter, AbstractBasePresenter<DetailView>() 
     override fun onUiReady(lifecycleOwner: LifecycleOwner, pid: String) {
      //   mPodcastModel.save_detailPodcast(pid)
         requestData(pid)
-        mPodcastModel.get_DetailPodcast(pid).observe(lifecycleOwner, Observer {
-          it?.let {
-            //  Log.d("Detail",it.toString())
-              mView?.showDetailPodcast(it)
-          }
+//        mPodcastModel.get_DetailPodcast(pid).observe(lifecycleOwner, Observer {
+//          it?.let {
+//            //  Log.d("Detail",it.toString())
+//              mView?.showDetailPodcast(it)
+//          }
+//        })
+
+        mPodcastModel.getDetail(podcastID = pid,onSuccess = {
+            mView?.showDetailPodcast(it)
+        },
+        onFialure = {
+            Log.d("DetailError",it)
         })
 
     }
